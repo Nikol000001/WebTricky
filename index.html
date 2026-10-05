@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe | Nikol Jaramillo 🏀</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Tic-Tac-Toe 🏀 Nikol Jaramillo</h1>
+        <p>Desarrollo Web | Ing. Multimedia - 7mo Semestre</p>
+    </header>
+
+    <div class="counter-section">
+        <button class="btn" id="counter-btn">Incrementar Clics</button>
+        <p id="counter-text">Has hecho clic 0 veces.</p>
+    </div>
+
+    <div class="game-wrapper">
+        <div class="board-section">
+            <div class="status" id="status">Siguiente jugador: <span style="color: var(--basket-orange)">X</span></div>
+            
+            <div class="board" id="board">
+                <!-- Squares injected by JS -->
+                <div class="winner-overlay" id="winner-overlay">
+                    <div class="winner-text" id="winner-text">¡Ganador!</div>
+                    <button class="btn play-again-btn" onclick="resetGame()">Jugar de Nuevo 🔄</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h3>Historial de Jugadas</h3>
+            <ul class="history-list" id="history-list">
+                <!-- History injected by JS -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
