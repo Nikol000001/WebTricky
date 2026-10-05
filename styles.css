@@ -1,0 +1,462 @@
+"""@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+:root {
+    --bg-color: #17151f; /* Dark background */
+    --panel-bg: #221d30;
+    --purple-main: #6b4b9b;
+    --purple-light: #9d7bd4;
+    --purple-dark: #463166;
+    --basket-orange: #ff7f11;
+    --text-light: #eaeaea;
+    --text-muted: #a39eb0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-light);
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 10px;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--panel-bg), #1a1625);
+    border-radius: 15px;
+    border-bottom: 3px solid var(--basket-orange);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 600px;
+    width: 100%;
+}
+
+header h1 {
+    color: var(--purple-light);
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* Counter Section */
+.counter-section {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.counter-section p {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Common Buttons */
+.btn {
+    background-color: var(--purple-dark);
+    color: var(--text-light);
+    border: 2px solid transparent;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-size: 0.95rem;
+}
+
+.btn:hover {
+    background-color: var(--purple-main);
+    border-color: var(--purple-light);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 75, 155, 0.4);
+}
+
+/* Game Layout */
+.game-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 900px;
+    width: 100%;
+}
+
+.board-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    min-height: 35px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status span {
+    color: var(--basket-orange);
+}
+
+/* The Board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 12px;
+    padding: 20px;
+    background-color: var(--panel-bg);
+    border: 4px solid var(--purple-dark);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+/* Court lines aesthetic */
+.board::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    right: -10px;
+    height: 2px;
+    background: rgba(255, 127, 17, 0.2);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.square {
+    background-color: #2b253b;
+    border: 2px solid #3d3454;
+    border-radius: 12px;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-light);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.square:hover {
+    background-color: #352e47;
+    transform: scale(1.03);
+    border-color: var(--purple-main);
+}
+
+.square.x-mark {
+    color: var(--basket-orange);
+    text-shadow: 0 0 15px rgba(255, 127, 17, 0.4);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.square.o-mark {
+    color: var(--purple-light);
+    text-shadow: 0 0 15px rgba(157, 123, 212, 0.4);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* History Section */
+.history-section {
+    background-color: var(--panel-bg);
+    padding: 25px;
+    border-radius: 16px;
+    border: 2px solid var(--purple-dark);
+    min-width: 250px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.history-section h3 {
+    margin-bottom: 15px;
+    color: var(--purple-light);
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.history-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Scrollbar styles for history */
+.history-list::-webkit-scrollbar {
+    width: 6px;
+}
+.history-list::-webkit-scrollbar-track {
+    background: #1a1625;
+    border-radius: 4px;
+}
+.history-list::-webkit-scrollbar-thumb {
+    background: var(--purple-dark);
+    border-radius: 4px;
+}
+
+.history-list button {
+    width: 100%;
+    text-align: left;
+    padding: 12px 15px;
+    background-color: #1a1625;
+    border-color: #352e47;
+    position: relative;
+    padding-left: 35px;
+}
+
+.history-list button::before {
+    content: '🏀';
+    position: absolute;
+    left: 10px;
+    font-size: 0.8rem;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.history-list button:hover::before {
+    opacity: 1;
+}
+
+.history-list button.current-move {
+    background-color: var(--purple-main);
+    border-color: var(--purple-light);
+}
+
+/* Winner Overlay */
+.winner-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(23, 21, 31, 0.9);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 10;
+}
+
+.winner-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.winner-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--basket-orange);
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255, 127, 17, 0.6);
+    transform: scale(0.8);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.winner-overlay.active .winner-text {
+    transform: scale(1);
+    animation: float 2s infinite ease-in-out;
+}
+
+.play-again-btn {
+    margin-top: 20px;
+    background-color: var(--basket-orange);
+    color: #111;
+    font-size: 1.1rem;
+}
+.play-again-btn:hover {
+    background-color: #ff9940;
+    border-color: #ff9940;
+    box-shadow: 0 5px 15px rgba(255, 127, 17, 0.4);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+"""
+
+script_js = """// --- Estado del Componente (Simulando React) ---
+let clickCount = 0;
+let history = [{ squares: Array(9).fill(null) }];
+let currentMove = 0;
+
+// --- Referencias al DOM ---
+const counterBtn = document.getElementById('counter-btn');
+const counterText = document.getElementById('counter-text');
+const boardEl = document.getElementById('board');
+const statusEl = document.getElementById('status');
+const historyListEl = document.getElementById('history-list');
+const winnerOverlay = document.getElementById('winner-overlay');
+const winnerText = document.getElementById('winner-text');
+
+// --- Lógica del Contador Extra ---
+counterBtn.addEventListener('click', () => {
+    clickCount++;
+    counterText.textContent = `Has hecho clic ${clickCount} veces.`;
+});
+
+// --- Inicialización del Tablero ---
+const squaresEls = [];
+for (let i = 0; i < 9; i++) {
+    const square = document.createElement('div');
+    square.classList.add('square');
+    square.addEventListener('click', () => handleSquareClick(i));
+    // Insertar antes del overlay
+    boardEl.insertBefore(square, winnerOverlay);
+    squaresEls.push(square);
+}
+
+// --- Función Principal de Renderizado ---
+function render() {
+    const current = history[currentMove];
+    const winnerInfo = calculateWinner(current.squares);
+    const winner = winnerInfo ? winnerInfo.winner : null;
+
+    // 1. Actualizar casillas
+    current.squares.forEach((val, idx) => {
+        squaresEls[idx].textContent = val ? val : '';
+        squaresEls[idx].className = 'square'; // reset classes
+        if (val === 'X') {
+            squaresEls[idx].classList.add('x-mark');
+        } else if (val === 'O') {
+            squaresEls[idx].classList.add('o-mark');
+        }
+    });
+
+    // 2. Actualizar Estado y Overlay de Ganador
+    if (winner) {
+        const winnerColor = winner === 'X' ? 'var(--basket-orange)' : 'var(--purple-light)';
+        statusEl.innerHTML = `Ganador: <span style="color: ${winnerColor}">${winner}</span>`;
+        
+        let winMessage = winner === 'X' ? '¡Ganaste con 🏀!' : '¡Ganó la O! 🏆';
+        winnerText.innerHTML = winMessage;
+        winnerOverlay.classList.add('active');
+    } else if (!current.squares.includes(null)) {
+        statusEl.textContent = `¡Es un empate!`;
+        winnerText.innerHTML = '¡Empate! 🤝<br><span style="font-size:1.2rem; color: #fff;">Buen juego defensivo</span>';
+        winnerOverlay.classList.add('active');
+    } else {
+        const nextPlayer = currentMove % 2 === 0 ? 'X' : 'O';
+        const nextColor = nextPlayer === 'X' ? 'var(--basket-orange)' : 'var(--purple-light)';
+        statusEl.innerHTML = `Siguiente jugador: <span style="color: ${nextColor}">${nextPlayer}</span>`;
+        winnerOverlay.classList.remove('active');
+    }
+
+    // 3. Actualizar Lista de Historial
+    historyListEl.innerHTML = '';
+    history.forEach((_, move) => {
+        const desc = move ? `Ir a la jugada #${move}` : 'Ir al inicio del juego';
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.classList.add('btn');
+        if (move === currentMove) {
+            btn.classList.add('current-move');
+        }
+        btn.textContent = desc;
+        btn.addEventListener('click', () => jumpTo(move));
+        li.appendChild(btn);
+        historyListEl.appendChild(li);
+    });
+}
+
+// --- Manejador de Clic en Casilla ---
+function handleSquareClick(i) {
+    const current = history[currentMove];
+    
+    // Si hay ganador o la casilla ya está ocupada, no hacer nada
+    if (calculateWinner(current.squares) || current.squares[i]) {
+        return;
+    }
+
+    // Crear una copia del array de casillas
+    const nextSquares = current.squares.slice();
+    nextSquares[i] = currentMove % 2 === 0 ? 'X' : 'O';
+
+    // Actualizar historial recortando el futuro si viajamos en el tiempo
+    history = history.slice(0, currentMove + 1);
+    history.push({ squares: nextSquares });
+    currentMove = history.length - 1;
+    
+    render();
+}
+
+// --- Viaje en el Tiempo ---
+function jumpTo(move) {
+    currentMove = move;
+    render();
+}
+
+// --- Reiniciar Juego ---
+function resetGame() {
+    history = [{ squares: Array(9).fill(null) }];
+    currentMove = 0;
+    render();
+}
+
+// --- Lógica de Ganador ---
+function calculateWinner(squares) {
+    const lines = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontales
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Verticales
+        [0, 4, 8], [2, 4, 6]             // Diagonales
+    ];
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return { winner: squares[a], line: lines[i] };
+        }
+    }
+    return null;
+}
+
+// Render inicial
+render();
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(index_html)
+
+with open("styles.css", "w", encoding="utf-8") as f:
+    f.write(styles_css)
+
+with open("script.js", "w", encoding="utf-8") as f:
+    f.write(script_js)
+
+print("Files created: index.html, styles.css, script.js")
