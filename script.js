@@ -1,4 +1,4 @@
-"""// --- Estado del Componente (Simulando React) ---
+// --- Estado del Componente (Simulando React) ---
 let clickCount = 0;
 let history = [{ squares: Array(9).fill(null) }];
 let currentMove = 0;
@@ -131,16 +131,3 @@ function calculateWinner(squares) {
     }
     return null;
 }
-
-// Render inicial
-render();
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(index_html)
-
-with open("styles.css", "w", encoding="utf-8") as f:
-    f.write(styles_css)
-
-with open("script.js", "w", encoding="utf-8") as f:
-    f.write(script_js)
